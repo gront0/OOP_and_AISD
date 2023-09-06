@@ -27,6 +27,7 @@ int main()
 	fraction2.denominator = 9;
 
 	result = summaFraction(fraction1, fraction2);
+
 	printFraction(fraction);
 	
 	std::cout << result.numerator << '/' << result.denominator << std::endl;
