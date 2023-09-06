@@ -51,3 +51,16 @@ Module.symvers
 Mkfile.old
 dkms.conf
 first-06.09.2023/first-06.09.2023/Debug/first-06.09.2023.tlog/CL.read.1.tlog
+first-06.09.2023/.vs/first-06.09.2023/v16/ipch/AutoPCH/70b53f297e7d16a0/SOURCE1.ipch
+first-06.09.2023/.vs/first-06.09.2023/v16/.suo
+first-06.09.2023/.vs/first-06.09.2023/v16/Browse.VC.db
+first-06.09.2023/.vs/first-06.09.2023/v16/ipch/AutoPCH/ec2db0605d7537a0/FIRST-06.09.2023.ipch
+first-06.09.2023/first-06.09.2023/Debug/first-06.09.2023.exe.recipe
+*.sln
+*.lastbuildstate
+*.tlog
+*.filters
+*.log
+*.vcxproj
+*.user
+*.ipch
