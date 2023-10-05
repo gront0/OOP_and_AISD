@@ -1,47 +1,47 @@
-#pragma once
+ï»¿#pragma once
 #include <iostream>
 using namespace std;
 
 class Fraction {
 private:
-    int numerator;   // ×èñëèòåëü
-    int denominator; // Çíàìåíàòåëü
+    int numerator;   // Ð§Ð¸ÑÐ»Ð¸Ñ‚ÐµÐ»ÑŒ
+    int denominator; // Ð—Ð½Ð°Ð¼ÐµÐ½Ð°Ñ‚ÐµÐ»ÑŒ
 
 public:
-    // Êîíñòðóêòîðû
+    // ÐšÐ¾Ð½ÑÑ‚Ñ€ÑƒÐºÑ‚Ð¾Ñ€Ñ‹
     Fraction();
     Fraction(int num, int den);
 
-    // Ìåòîäû óñòàíîâëåíèÿ/ïîëó÷åíèÿ ÷èñëèòåëÿ è çíàìåíàòåëÿ
+    // ÐœÐµÑ‚Ð¾Ð´Ñ‹ ÑƒÑÑ‚Ð°Ð½Ð¾Ð²Ð»ÐµÐ½Ð¸Ñ/Ð¿Ð¾Ð»ÑƒÑ‡ÐµÐ½Ð¸Ñ Ñ‡Ð¸ÑÐ»Ð¸Ñ‚ÐµÐ»Ñ Ð¸ Ð·Ð½Ð°Ð¼ÐµÐ½Ð°Ñ‚ÐµÐ»Ñ
     void setNumerator(int num);
     void setDenominator(int den);
     int getNumerator() const;
     int getDenominator() const;
 
-    // Àðèôìåòè÷åñêèå îïåðàöèè ìåæäó äðîáÿìè
+    // ÐÑ€Ð¸Ñ„Ð¼ÐµÑ‚Ð¸Ñ‡ÐµÑÐºÐ¸Ðµ Ð¾Ð¿ÐµÑ€Ð°Ñ†Ð¸Ð¸ Ð¼ÐµÐ¶Ð´Ñƒ Ð´Ñ€Ð¾Ð±ÑÐ¼Ð¸
     Fraction operator+(const Fraction& other) const;
     Fraction operator-(const Fraction& other) const;
     Fraction operator*(const Fraction& other) const;
     Fraction operator/(const Fraction& other) const;
 
-    // Îïåðàöèè ñðàâíåíèÿ
+    // ÐžÐ¿ÐµÑ€Ð°Ñ†Ð¸Ð¸ ÑÑ€Ð°Ð²Ð½ÐµÐ½Ð¸Ñ
     bool operator>(const Fraction& other) const;
     bool operator<(const Fraction& other) const;
     bool operator==(const Fraction& other) const;
     bool operator!=(const Fraction& other) const;
 
-    // Ïðèâåäåíèå äðîáè ê íåñîêðàòèìîé
+    // ÐŸÑ€Ð¸Ð²ÐµÐ´ÐµÐ½Ð¸Ðµ Ð´Ñ€Ð¾Ð±Ð¸ Ðº Ð½ÐµÑÐ¾ÐºÑ€Ð°Ñ‚Ð¸Ð¼Ð¾Ð¹
     void reduce();
 
-    // Ìåòîäû ââîäà/âûâîäà â êîíñîëü
+    // ÐœÐµÑ‚Ð¾Ð´Ñ‹ Ð²Ð²Ð¾Ð´Ð°/Ð²Ñ‹Ð²Ð¾Ð´Ð° Ð² ÐºÐ¾Ð½ÑÐ¾Ð»ÑŒ
     void input();
     void output() const;
 
-    // Óíèêàëüíûå ìåòîäû
+    // Ð£Ð½Ð¸ÐºÐ°Ð»ÑŒÐ½Ñ‹Ðµ Ð¼ÐµÑ‚Ð¾Ð´Ñ‹
     double convertToDouble() const;
     Fraction convertFromDouble(double value, int precision);
 
 private:
-    // Ìåòîä äëÿ âû÷èñëåíèÿ íàèáîëüøåãî îáùåãî äåëèòåëÿ
+    // ÐœÐµÑ‚Ð¾Ð´ Ð´Ð»Ñ Ð²Ñ‹Ñ‡Ð¸ÑÐ»ÐµÐ½Ð¸Ñ Ð½Ð°Ð¸Ð±Ð¾Ð»ÑŒÑˆÐµÐ³Ð¾ Ð¾Ð±Ñ‰ÐµÐ³Ð¾ Ð´ÐµÐ»Ð¸Ñ‚ÐµÐ»Ñ
     int computeGCD(int a, int b) const;
 };

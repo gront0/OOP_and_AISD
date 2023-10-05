@@ -1,12 +1,12 @@
-#include "Fraction.h"
+п»ї#include "Fraction.h"
 #include <iostream>
 
-// Конструкторы
+// РљРѕРЅСЃС‚СЂСѓРєС‚РѕСЂС‹
 Fraction::Fraction() : numerator(0), denominator(1) {}
 
 Fraction::Fraction(int num, int den) : numerator(num), denominator(den) {}
 
-// Методы установления/получения числителя и знаменателя
+// РњРµС‚РѕРґС‹ СѓСЃС‚Р°РЅРѕРІР»РµРЅРёСЏ/РїРѕР»СѓС‡РµРЅРёСЏ С‡РёСЃР»РёС‚РµР»СЏ Рё Р·РЅР°РјРµРЅР°С‚РµР»СЏ
 void Fraction::setNumerator(int num) { numerator = num; }
 
 void Fraction::setDenominator(int den) { denominator = den; }
@@ -15,7 +15,7 @@ int Fraction::getNumerator() const { return numerator; }
 
 int Fraction::getDenominator() const { return denominator; }
 
-// Арифметические операции между дробями
+// РђСЂРёС„РјРµС‚РёС‡РµСЃРєРёРµ РѕРїРµСЂР°С†РёРё РјРµР¶РґСѓ РґСЂРѕР±СЏРјРё
 Fraction Fraction::operator+(const Fraction& other) const {
     int num = numerator * other.denominator + other.numerator * denominator;
     int den = denominator * other.denominator;
@@ -40,7 +40,7 @@ Fraction Fraction::operator/(const Fraction& other) const {
     return Fraction(num, den);
 }
 
-// Операции сравнения
+// РћРїРµСЂР°С†РёРё СЃСЂР°РІРЅРµРЅРёСЏ
 bool Fraction::operator>(const Fraction& other) const {
     return (numerator * other.denominator) > (other.numerator * denominator);
 }
@@ -57,18 +57,18 @@ bool Fraction::operator!=(const Fraction& other) const {
     return (numerator * other.denominator) != (other.numerator * denominator);
 }
 
-// Приведение дроби к несократимой
+// РџСЂРёРІРµРґРµРЅРёРµ РґСЂРѕР±Рё Рє РЅРµСЃРѕРєСЂР°С‚РёРјРѕР№
 void Fraction::reduce() {
     int gcd = computeGCD(numerator, denominator);
     numerator /= gcd;
     denominator /= gcd;
 }
 
-// Методы ввода/вывода в консоль
+// РњРµС‚РѕРґС‹ РІРІРѕРґР°/РІС‹РІРѕРґР° РІ РєРѕРЅСЃРѕР»СЊ
 void Fraction::input() {
-    std::cout << "Введите числитель: ";
+    std::cout << "Р’РІРµРґРёС‚Рµ С‡РёСЃР»РёС‚РµР»СЊ: ";
     std::cin >> numerator;
-    std::cout << "Введите знаменатель: ";
+    std::cout << "Р’РІРµРґРёС‚Рµ Р·РЅР°РјРµРЅР°С‚РµР»СЊ: ";
     std::cin >> denominator;
 }
 
@@ -76,7 +76,7 @@ void Fraction::output() const {
     std::cout << numerator << "/" << denominator;
 }
 
-// Уникальные методы
+// РЈРЅРёРєР°Р»СЊРЅС‹Рµ РјРµС‚РѕРґС‹
 double Fraction::convertToDouble() const {
     return static_cast<double>(numerator) / denominator;
 }
@@ -87,7 +87,7 @@ Fraction Fraction::convertFromDouble(double value, int precision) {
     return Fraction(num, den);
 }
 
-// Метод для вычисления наибольшего общего делителя
+// РњРµС‚РѕРґ РґР»СЏ РІС‹С‡РёСЃР»РµРЅРёСЏ РЅР°РёР±РѕР»СЊС€РµРіРѕ РѕР±С‰РµРіРѕ РґРµР»РёС‚РµР»СЏ 
 int Fraction::computeGCD(int a, int b) const {
     if (b == 0)
         return a;
