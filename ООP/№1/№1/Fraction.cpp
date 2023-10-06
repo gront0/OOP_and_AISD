@@ -4,12 +4,24 @@
 // Конструкторы
 Fraction::Fraction() : numerator(0), denominator(1) {}
 
-Fraction::Fraction(int num, int den) : numerator(num), denominator(den) {}
+Fraction::Fraction(int num, int den) : numerator(num), denominator(den) {
+    if (denominator == 0) {
+        std::cout << "Ошибка: Деление на ноль" << std::endl;
+        exit(1);
+    }
+}
 
 // Методы установления/получения числителя и знаменателя
 void Fraction::setNumerator(int num) { numerator = num; }
 
-void Fraction::setDenominator(int den) { denominator = den; }
+void Fraction::setDenominator(int den) { 
+    if (den == 0) {
+        std::cout << "Ошибка: Деление на ноль" << std::endl;
+        exit(1);
+    }
+
+    denominator = den; 
+}
 
 int Fraction::getNumerator() const { return numerator; }
 
@@ -35,6 +47,11 @@ Fraction Fraction::operator*(const Fraction& other) const {
 }
 
 Fraction Fraction::operator/(const Fraction& other) const {
+    if (other.denominator == 0) {
+        std::cout << "Ошибка: Деление на ноль" << std::endl;
+        exit(1);
+    }
+
     int num = numerator * other.denominator;
     int den = denominator * other.numerator;
     return Fraction(num, den);
@@ -82,6 +99,11 @@ double Fraction::convertToDouble() const {
 }
 
 Fraction Fraction::convertFromDouble(double value, int precision) {
+    if (precision == 0) {
+        std::cout << "Ошибка: Деление на ноль" << std::endl;
+        exit(1);
+    }
+
     int num = static_cast<int>(value * precision);
     int den = precision;
     return Fraction(num, den);
