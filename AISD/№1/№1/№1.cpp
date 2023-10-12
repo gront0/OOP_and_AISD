@@ -105,7 +105,7 @@ int main() {
     cout << "Пожалуйста, укажите количество городов (от 3): "; cin >> n;
     if (n < 3) return 0;
     cout << "Пожалуйста, укажите начальный город (отсчёт идёт с 0): "; cin >> startCity;
-    if (startCity < 3 || startCity > n) return 0;
+    if (startCity < 0 || startCity > n) return 0;
 
     for (int i = 3; i <= n; i++) {
         vector<vector<int>> matrix(i, vector<int>(i));
