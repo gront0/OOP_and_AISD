@@ -11,8 +11,7 @@ int randomInt(int min, int max) {
 }
 
 // заполнение матрицы случайными значениями
-void fillMatrix(vector<vector<int>>& matrix) {
-    int n = matrix.size();
+void fillMatrix(vector<vector<int>>& matrix, int n) {
     for (int i = 0; i < n; i++) {
         for (int j = 0; j < n; j++) {
             if (i == j) {
@@ -76,14 +75,13 @@ int routeCost(const vector<vector<int>>& matrix, const vector<int>& path) {
 }
 
 // поиск оптимального маршрута методом полного перебора
-vector<int> enumeration(const vector<vector<int>>& matrix, int startCity) {
+vector<int> enumeration(const vector<vector<int>>& matrix, int startCity, int& minCost) {
     int n = matrix.size();
     vector<int> bestPath;
-    int minCost = INT_MAX;
 
     vector<vector<int>> permutations = getPermutations(n);
 
-    for (auto& path : permutations) {
+    for (vector<int>& path : permutations) {
         if (path[0] == startCity) {
             int cost = routeCost(matrix, path);
             if (cost < minCost) {
@@ -100,23 +98,36 @@ int main() {
     setlocale(LC_ALL, "Russian");
     srand(static_cast<unsigned int>(time(0)));
 
-    int n = 5; // количество городов
+    int n; // количество городов
     int startCity = 0; // начальный город
+    int minCost = INT_MAX; // мин. стоимость
 
-    vector<vector<int>> matrix(n, vector<int>(n));
-    fillMatrix(matrix);
+    cout << "Пожалуйста, укажите количество городов (от 3): "; cin >> n;
+    if (n < 3) return 0;
+    cout << "Пожалуйста, укажите начальный город (отсчёт идёт с 0): "; cin >> startCity;
+    if (startCity < 3 || startCity > n) return 0;
 
-    vector<int> bestPath = enumeration(matrix, startCity);
+    for (int i = 3; i <= n; i++) {
+        vector<vector<int>> matrix(i, vector<int>(i));
+        fillMatrix(matrix, i);
 
-    cout << "Матрциа:" << endl;
-    coutMatrix(matrix);
-    cout << endl;
+        vector<int> bestPath = enumeration(matrix, startCity, minCost);
 
-    cout << "Лучший путь: ";
-    for (int city : bestPath) {
-        cout << city << " ";
+        cout << "\n" << endl;
+
+        cout << "Матрица " << i << "x" << i << ":" << endl;
+        coutMatrix(matrix);
+        cout << endl;
+
+        cout << "Цена пути: " << minCost << endl;
+        cout << "Лучший путь: ";
+        for (int city : bestPath) {
+            cout << city << " ";
+        }
+        cout << endl;
+
+        minCost = INT_MAX;
     }
-    cout << endl;
 
     return 0;
 }
