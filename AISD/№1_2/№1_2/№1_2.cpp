@@ -32,5 +32,15 @@ int main() {
         cout << endl;
     }
 
+    vector<int> route; // маршрут коммивояжёра
+
+    int current_city = 0; // начинаем с первого города
+    route.push_back(current_city);
+
+    vector<bool> visited(n, false); // флаги посещения городов
+    visited[current_city] = true;
+
+    int total_distance = 0; // общая стоимость маршрута
+
     return 0;
 }
