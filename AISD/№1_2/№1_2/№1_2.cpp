@@ -42,5 +42,34 @@ int main() {
 
     int total_distance = 0; // общая стоимость маршрута
 
+    while (route.size() < n) {
+        int next_city = -1;
+        int min_distance = numeric_limits<int>::max();
+
+        // Поиск ближайшего непосещенного города
+        for (int i = 0; i < n; i++) {
+            if (!visited[i] && distance[current_city][i] < min_distance) {
+                min_distance = distance[current_city][i];
+                next_city = i;
+            }
+        }
+
+        route.push_back(next_city);
+        visited[next_city] = true;
+        current_city = next_city;
+
+        total_distance += min_distance;
+    }
+
+    // Вывод маршрута
+    cout << "Оптимальный маршрут коммивояжёра: ";
+    for (int i = 0; i < n; i++) {
+        cout << route[i] << " ";
+    }
+    cout << endl;
+
+    // Вывод оптимальной стоимости маршрута
+    cout << "Оптимальная стоимость маршрута: " << total_distance << endl;
+
     return 0;
 }
