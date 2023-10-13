@@ -2,6 +2,7 @@
 #include <vector>
 #include <ctime>
 #include <locale.h>
+#include <chrono>
 
 using namespace std;
 
@@ -101,21 +102,50 @@ int main() {
     int n; // количество городов
     int startCity = 0; // начальный город
     int minCost = INT_MAX; // мин. стоимость
+    int task; // свойство выполнения
 
     cout << "Пожалуйста, укажите количество городов (от 3): "; cin >> n;
     if (n < 3) return 0;
     cout << "Пожалуйста, укажите начальный город (отсчёт идёт с 0): "; cin >> startCity;
     if (startCity < 0 || startCity > n) return 0;
+    cout << "Пожалуйста, укажите свойство выполнения (1 - одна генерация / 0 - все генерации): "; cin >> task;
+    if (task > 1 || task < 0) return 0;
 
-    for (int i = 3; i <= n; i++) {
-        vector<vector<int>> matrix(i, vector<int>(i));
-        fillMatrix(matrix, i);
+    // Начало измерения времени
+    auto start = chrono::high_resolution_clock::now();
+
+    if (task == 0) {
+        for (int i = 3; i <= n; i++) {
+            vector<vector<int>> matrix(i, vector<int>(i));
+            fillMatrix(matrix, i);
+
+            vector<int> bestPath = enumeration(matrix, startCity, minCost);
+
+            cout << "\n" << endl;
+
+            cout << "Матрица " << i << "x" << i << ":" << endl;
+            coutMatrix(matrix);
+            cout << endl;
+
+            cout << "Цена пути: " << minCost << endl;
+            cout << "Лучший путь: ";
+            for (int city : bestPath) {
+                cout << city << " ";
+            }
+            cout << endl;
+
+            minCost = INT_MAX;
+        }
+    }
+    else {
+        vector<vector<int>> matrix(n, vector<int>(n));
+        fillMatrix(matrix, n);
 
         vector<int> bestPath = enumeration(matrix, startCity, minCost);
 
         cout << "\n" << endl;
 
-        cout << "Матрица " << i << "x" << i << ":" << endl;
+        cout << "Матрица " << n << "x" << n << ":" << endl;
         coutMatrix(matrix);
         cout << endl;
 
@@ -125,9 +155,17 @@ int main() {
             cout << city << " ";
         }
         cout << endl;
-
-        minCost = INT_MAX;
     }
+
+    // Конец измерения времени
+    auto end = chrono::high_resolution_clock::now();
+
+    // Вычисление времени выполнения в миллисекундах
+    chrono::duration<double, milli> duration = end - start;
+    double executionTime = duration.count();
+
+    // Вывод времени выполнения
+    cout << "Время выполнения: " << executionTime << " мс" << endl;
 
     return 0;
 }
