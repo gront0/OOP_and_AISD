@@ -104,12 +104,12 @@ int main() {
     int minCost = INT_MAX; // мин. стоимость
     int task; // свойство выполнения
 
+    cout << "Пожалуйста, укажите свойство выполнения (1 - одна генерация / 0 - все генерации / -1 - заданная): "; cin >> task;
+    if (task > 1 || task < -1) return 0;
     cout << "Пожалуйста, укажите количество городов (от 3): "; cin >> n;
-    if (n < 3) return 0;
+    if (n < 3 || (task == -1 && n != 5)) return 0;
     cout << "Пожалуйста, укажите начальный город (отсчёт идёт с 0): "; cin >> startCity;
     if (startCity < 0 || startCity > n) return 0;
-    cout << "Пожалуйста, укажите свойство выполнения (1 - одна генерация / 0 - все генерации): "; cin >> task;
-    if (task > 1 || task < 0) return 0;
 
     // Начало измерения времени
     auto start = chrono::high_resolution_clock::now();
@@ -137,9 +137,33 @@ int main() {
             minCost = INT_MAX;
         }
     }
-    else {
+    else if (task == 1) {
         vector<vector<int>> matrix(n, vector<int>(n));
         fillMatrix(matrix, n);
+
+        vector<int> bestPath = enumeration(matrix, startCity, minCost);
+
+        cout << "\n" << endl;
+
+        cout << "Матрица " << n << "x" << n << ":" << endl;
+        coutMatrix(matrix);
+        cout << endl;
+
+        cout << "Цена пути: " << minCost << endl;
+        cout << "Лучший путь: ";
+        for (int city : bestPath) {
+            cout << city << " ";
+        }
+        cout << endl;
+    }
+    else {
+        vector<vector<int>> matrix = {
+        {0, 35, 30, 31, 94},
+        {91, 0, 100, 63, 65},
+        {67, 17, 0, 87, 22},
+        {63, 48, 82, 0, 99},
+        {39, 9, 28, 20, 0},
+        };
 
         vector<int> bestPath = enumeration(matrix, startCity, minCost);
 
