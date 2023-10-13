@@ -96,6 +96,27 @@ vector<int> enumeration(const vector<vector<int>>& matrix, int startCity, int& m
     return bestPath;
 }
 
+// поиск худшего пути
+vector<int> worstPath(const vector<vector<int>>& matrix, int startCity, int& maxCost) {
+    maxCost = INT_MIN;
+    int n = matrix.size();
+    vector<int> worstPath;
+
+    vector<vector<int>> permutations = getPermutations(n);
+
+    for (vector<int>& path : permutations) {
+        if (path[0] == startCity) {
+            int cost = routeCost(matrix, path);
+            if (cost > maxCost) {
+                maxCost = cost;
+                worstPath = path;
+            }
+        }
+    }
+
+    return worstPath;
+}
+
 int main() {
     setlocale(LC_ALL, "Russian");
     srand(static_cast<unsigned int>(time(0)));
@@ -103,6 +124,7 @@ int main() {
     int n = 0; // количество городов
     int startCity = 0; // начальный город
     int minCost = INT_MAX; // мин. стоимость
+    int maxCost = INT_MIN;
     int task; // свойство выполнения
     int evr = 0; // эвристика
 
@@ -125,6 +147,15 @@ int main() {
             cost[i][j] = matrix[i][j];
         }
     }
+
+    cout << "\n" << endl;
+    vector<int> worst = worstPath(matrix, startCity, maxCost);
+    cout << "Худший путь: ";
+    for (int i = 0; i < worst.size(); i++) {
+        cout << worst[i] << " ";
+    }
+    cout << endl;
+    cout << "Стоимость худшего пути: " << maxCost << endl;
 
     // Начало измерения времени
     auto start = chrono::high_resolution_clock::now();
