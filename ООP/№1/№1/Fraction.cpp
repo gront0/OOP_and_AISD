@@ -9,7 +9,7 @@ Fraction::Fraction() : numerator(0), denominator(1) {}
 Fraction::Fraction(int num, int den) : numerator(num), denominator(den) {
     if (denominator == 0) {
         cerr << "ошибка: деление на ноль! Знаменатель будет заменен на 1.\n";
-        denominator = 1; // Заменить нулевой знаменатель на 1
+        denominator = 1; // Замена нулевой знаменатель на 1
     }
 }
 
@@ -19,7 +19,7 @@ void Fraction::setNumerator(int num) { numerator = num; }
 void Fraction::setDenominator(int den) { 
     if (den == 0) {
         cerr << "ошибка: деление на ноль! Знаменатель будет заменен на 1.\n";
-        den = 1; // Заменить нулевой знаменатель на 1
+        den = 1; // Замена нулевой знаменатель на 1
     }
 
     denominator = den; 
