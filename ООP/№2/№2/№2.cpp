@@ -145,13 +145,5 @@ int main() {
     }
     std::cout << std::endl;
 
-    // Перегрузка оператора сравнения
-    if (anotherArray == concatenatedArray) {
-        std::cout << "Массивы равны" << std::endl;
-    }
-    else {
-        std::cout << "Массивы не равны" << std::endl;
-    }
-
     return 0;
 }
