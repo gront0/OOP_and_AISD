@@ -78,5 +78,65 @@ int main() {
     int minElement = arr.findMin();
     cout << "Минимальный элемент: " << minElement << endl;
 
+    // итерация по массиву и вывод элементов
+    std::cout << "Элементы:";
+    for (int* it = arr.begin(); it != arr.end(); ++it) {
+        std::cout << " " << *it;
+    }
+    std::cout << std::endl;
+
+    // вставка элемента перед итератором
+    int newElement = 6;
+    arr.insertBefore(arr.begin() + 2, newElement);
+    std::cout << "После вставки итератором:";
+    for (int* it = arr.begin(); it != arr.end(); ++it) {
+        std::cout << " " << *it;
+    }
+    std::cout << std::endl;
+
+    // удаление элемента с помощью итератора
+    arr.erase(arr.begin() + 1);
+    std::cout << "После удаления итератором:";
+    for (int* it = arr.begin(); it != arr.end(); ++it) {
+        std::cout << " " << *it;
+    }
+    std::cout << std::endl;
+
+    // перегрузка оператора присваивания
+    MyArray<int> anotherArray;
+    anotherArray = arr;
+    std::cout << "копия массива:";
+    for (int* it = anotherArray.begin(); it != anotherArray.end(); ++it) {
+        std::cout << " " << *it;
+    }
+    std::cout << std::endl;
+
+    // перегрузка оператора добавления элемента в конец массива
+    int newElement2 = 7;
+    anotherArray += newElement2;
+    std::cout << "Массив после добавления в конец:";
+    for (int* it = anotherArray.begin(); it != anotherArray.end(); ++it) {
+        std::cout << " " << *it;
+    }
+    std::cout << std::endl;
+
+    // Перегрузка оператора сложения (конкатенации) с другим массивом
+    int arr2[] = { 8, 9, 10 };
+    MyArray<int> newArray(arr2, 3);
+    MyArray<int> concatenatedArray = anotherArray + newArray;
+    std::cout << "После конкатенации:";
+    for (int* it = concatenatedArray.begin(); it != concatenatedArray.end(); ++it) {
+        std::cout << " " << *it;
+    }
+    std::cout << std::endl;
+
+    // Перегрузка оператора сравнения
+    if (anotherArray == concatenatedArray) {
+        std::cout << "Массивы равны" << std::endl;
+    }
+    else {
+        std::cout << "Массивы не равны" << std::endl;
+    }
+
     return 0;
 }

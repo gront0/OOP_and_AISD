@@ -170,12 +170,12 @@ public:
         }
     }
 
-    // Перегрузка оператора получения ссылки на элемент по индексу
+    // перегрузка оператора получения ссылки на элемент по индексу
     T& operator[](size_t index) {
         return data[index];
     }
 
-    // Перегрузка оператора присваивания
+    // перегрузка оператора присваивания
     MyArray& operator=(const MyArray& other) {
         if (this != &other) {
             MyArray temp(other);
@@ -184,7 +184,7 @@ public:
         return *this;
     }
 
-    // Перегрузка оператора добавления элемента в конец массива
+    // перегрузка оператора добавления элемента в конец массива
     MyArray& operator+(const T& element) {
         insert(element, size);
         return *this;
@@ -195,7 +195,7 @@ public:
         return *this;
     }
 
-    // Перегрузка оператора сложения (конкатенации) с другим массивом
+    // перегрузка оператора сложения (конкатенации) с другим массивом
     MyArray& operator+(const MyArray& other) {
         MyArray temp(*this);
         for (size_t i = 0; i < other.size; i++) {
@@ -211,7 +211,7 @@ public:
         return *this;
     }
 
-    // Перегрузка оператора сравнения
+    // перегрузка оператора сравнения
     bool operator==(const MyArray& other) const {
         if (size != other.size) {
             return false;
