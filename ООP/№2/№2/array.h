@@ -162,7 +162,7 @@ public:
         remove(index);
     }
 
-    void erase(T* first, T* last) {
+    void eraseDp(T* first, T* last) {
         size_t startIndex = first - data;
         size_t endIndex = last - data;
         for (size_t i = 0; i < endIndex - startIndex; i++) {

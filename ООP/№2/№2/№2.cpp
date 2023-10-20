@@ -10,6 +10,9 @@ int main() {
     // создание объекта MyArray
     int MyArr[] = { 5, 2, 8, 3, 1 };
     MyArray<int> arr(MyArr, 5);
+    
+    int NyArr[] = { 10, 3, 0, 12, 1, 5, 7, 9 };
+    MyArray<int> arr1(NyArr, 8);
 
     // вывод элементов массива
     cout << "Элементы массива: " << arr << endl;
@@ -78,33 +81,45 @@ int main() {
     int minElement = arr.findMin();
     cout << "Минимальный элемент: " << minElement << endl;
 
+
     // итерация по массиву и вывод элементов
     std::cout << "Элементы:";
-    for (int* it = arr.begin(); it != arr.end(); ++it) {
+    for (int* it = arr1.begin(); it != arr1.end(); ++it) {
         std::cout << " " << *it;
     }
     std::cout << std::endl;
 
     // вставка элемента перед итератором
     int newElement = 6;
-    arr.insertBefore(arr.begin() + 2, newElement);
-    std::cout << "После вставки итератором:";
-    for (int* it = arr.begin(); it != arr.end(); ++it) {
+    arr1.insertBefore(arr1.begin() + 2, newElement);
+    std::cout << "После вставки итератором (3 эл.):";
+    for (int* it = arr1.begin(); it != arr1.end(); ++it) {
         std::cout << " " << *it;
     }
     std::cout << std::endl;
 
     // удаление элемента с помощью итератора
-    arr.erase(arr.begin() + 1);
-    std::cout << "После удаления итератором:";
-    for (int* it = arr.begin(); it != arr.end(); ++it) {
+    arr1.erase(arr1.begin() + 1);
+    std::cout << "После удаления итератором (второй эл.):";
+    for (int* it = arr1.begin(); it != arr1.end(); ++it) {
+        std::cout << " " << *it;
+    }
+    std::cout << std::endl;
+
+    // Удаление диапазона элементов
+    int* first = arr1.begin() + 1; // второй эл.
+    int* last = arr1.begin() + 4; 
+    arr1.eraseDp(first, last);
+
+    std::cout << "Массив после удаления диапазона:";
+    for (int* it = arr1.begin(); it != arr1.end(); ++it) {
         std::cout << " " << *it;
     }
     std::cout << std::endl;
 
     // перегрузка оператора присваивания
     MyArray<int> anotherArray;
-    anotherArray = arr;
+    anotherArray = arr1;
     std::cout << "копия массива:";
     for (int* it = anotherArray.begin(); it != anotherArray.end(); ++it) {
         std::cout << " " << *it;
