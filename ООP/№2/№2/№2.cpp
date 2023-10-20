@@ -1,27 +1,82 @@
 ﻿#include <iostream>
+#include "array.h"
+#include <locale.h>
 
-#include "Array.h"
+using namespace std;
 
-double calculateAvg(Array arr)
-{
-	double avg = 0;
-	for (int i = 0; i < arr.size(); ++i) {
-		avg += arr[i];
-	}
-	avg /= arr.size();
-	return avg;
-}
+int main() {
+    setlocale(LC_ALL, "Russian");
 
-int main()
-{
-	Array arr(10, 0);
-	int a = arr[3];
-	std::cout << arr[3] << ' ' << arr[9] << std::endl;
-	arr[3] = 16;
-	arr[5] = arr[3];
-	std::cout << "Среднее значение: " << calculateAvg(arr) << '\n';
-	arr.print();
+    // создание объекта MyArray
+    int MyArr[] = { 5, 2, 8, 3, 1 };
+    MyArray<int> arr(MyArr, 5);
 
-	getchar();
-	return 0;
+    // вывод элементов массива
+    cout << "Элементы массива: " << arr << endl;
+
+    // сортировка элементов
+    arr.sort();
+
+    // вывод отсортированных элементов массива
+    cout << "Отсортированные элементы массива: " << arr << endl;
+
+    // вставка элемента по индексу
+    int element, index;
+    cout << "Введите элемент для вставки: ";
+    cin >> element;
+    cout << "Введите индекс для вставки: ";
+    cin >> index;
+    if (arr.insert(element, index)) {
+        cout << "Элемент успешно вставлен" << endl;
+    }
+    else {
+        cout << "Неверный индекс" << endl;
+    }
+
+    // вывод элементов массива после вставки
+    cout << "Элементы массива после вставки: " << arr << endl;
+
+    // удаление элемента по индексу
+    cout << "Введите индекс для удаления элемента: ";
+    cin >> index;
+    if (arr.remove(index)) {
+        cout << "Элемент успешно удален" << endl;
+    }
+    else {
+        cout << "Неверный индекс" << endl;
+    }
+
+    // вывод элементов массива после удаления
+    cout << "Элементы массива после удаления: " << arr << endl;
+
+    // удаление элемента по значению
+    cout << "Введите значение элемента для удаления: ";
+    cin >> element;
+    if (arr.removeZn(element)) {
+        cout << "Элемент успешно удален" << endl;
+    }
+    else {
+        cout << "Элемент не найден в массиве" << endl;
+    }
+
+    // вывод элементов массива после удаления по значению
+    cout << "Элементы массива после удаления по значению: " << arr << endl;
+
+    // удаление всех элементов с заданным значением
+    cout << "Введите элемент для удаления всех вхождений: ";
+    cin >> element;
+    arr.removeAll(element);
+
+    // вывод элементов массива после удаления всех вхождений
+    cout << "Элементы массива после удаления всех вхождений: " << arr << endl;
+
+    // поиск максимального элемента
+    int maxElement = arr.findMax();
+    cout << "Максимальный элемент: " << maxElement << endl;
+
+    // поиск минимального элемента
+    int minElement = arr.findMin();
+    cout << "Минимальный элемент: " << minElement << endl;
+
+    return 0;
 }
