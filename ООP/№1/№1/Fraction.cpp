@@ -100,19 +100,21 @@ double Fraction::convertToDouble() const {
 }
 
 void Fraction::convertFromDouble(double value, int precision) {
-    double scaledValue = value * pow(10, precision); // умножаем число на 10^precision, чтобы сохранить нужное количество значащих знаков после запятой
+    double scaledValue = value * pow(10, precision);
 
-    int roundedValue = static_cast<int>(scaledValue + 0.5); // округляем полученное число до ближайшего целого
-    numerator = roundedValue; // устанавливаем числитель равным округленному значению
+    // Используем округление в меньшую сторону с помощью floor()
+    int roundedValue = static_cast<int>(floor(scaledValue));
+
+    numerator = roundedValue;
 
     if (precision != 0) {
-        denominator = pow(10, precision); // устанавливаем знаменатель = 10^precision
+        denominator = pow(10, precision);
     }
     else {
         denominator = 1;
     }
 
-    reduce(); // сокращаем
+    reduce();
 }
 
 // Метод для вычисления наибольшего общего делителя 
