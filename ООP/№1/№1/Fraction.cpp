@@ -99,18 +99,7 @@ double Fraction::convertToDouble() const {
     return static_cast<double>(numerator) / denominator;
 }
 
-Fraction Fraction::convertFromDouble(double value, int precision) {
-    double num = value * precision;
-    double den = precision;
-
-    if (den == 0) {
-        cerr << "ошибка: деление на ноль!\n";
-    }
-
-    return Fraction(num, den);
-}
-
-Fraction Fraction::convertFromDouble(double value, int precision) {
+void Fraction::convertFromDouble(double value, int precision) {
     double scaledValue = value * pow(10, precision); // умножаем число на 10^precision, чтобы сохранить нужное количество значащих знаков после запятой
 
     int roundedValue = static_cast<int>(scaledValue + 0.5); // округляем полученное число до ближайшего целого

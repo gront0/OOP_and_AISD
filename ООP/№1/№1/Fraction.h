@@ -39,7 +39,7 @@ public:
 
     // Уникальные методы
     double convertToDouble() const;
-    Fraction convertFromDouble(double value, int precision);
+    void convertFromDouble(double value, int precision);
 
 private:
     // Метод для вычисления наибольшего общего делителя

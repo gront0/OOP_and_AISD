@@ -1,6 +1,7 @@
 ﻿#include <iostream>
 #include "array.h"
 #include <locale.h>
+#include <vector>
 
 using namespace std;
 
@@ -55,7 +56,7 @@ int main() {
     // удаление элемента по значению
     cout << "Введите значение элемента для удаления: ";
     cin >> element;
-    if (arr.removeZn(element)) {
+    if (arr.removeOne(element)) {
         cout << "Элемент успешно удален" << endl;
     }
     else {
@@ -107,9 +108,10 @@ int main() {
     std::cout << std::endl;
 
     // Удаление диапазона элементов
-    int* first = arr1.begin() + 1; // второй эл.
-    int* last = arr1.begin() + 4; 
-    arr1.eraseDp(first, last);
+    auto start = arr1.begin() + 1;
+    auto end = arr1.begin() + 4;
+
+    arr1.eraseRange(start, end);
 
     std::cout << "Массив после удаления диапазона:";
     for (int* it = arr1.begin(); it != arr1.end(); ++it) {

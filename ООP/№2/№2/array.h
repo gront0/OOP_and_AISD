@@ -2,12 +2,18 @@
 
 #include <iostream>
 #include <algorithm>
+#include <vector>
 
 template<typename T>
 class MyArray {
 private:
     T* data;
     size_t size;
+
+public:
+    template <typename IT, typename AT>
+    class TemplateIterator;
+    using Iterator = TemplateIterator<T, MyArray>;
 
 public:
     // Конструкторы
@@ -100,7 +106,7 @@ public:
     }
 
     // Удаление элемента по значению (первое вхождение)
-    bool removeZn(const T& element) {
+    bool removeOne(const T& element) {
         int index = find(element);
         if (index == -1) {
             return false; // Элемент отсутствует в массиве
@@ -162,12 +168,23 @@ public:
         remove(index);
     }
 
-    void eraseDp(T* first, T* last) {
-        size_t startIndex = first - data;
-        size_t endIndex = last - data;
-        for (size_t i = 0; i < endIndex - startIndex; i++) {
-            remove(startIndex);
+    // Функция для удаления элемента из списка
+    template<typename IT>
+    void eraseRange(IT start, IT end) {
+        size_t rangeSize = std::distance(start, end);
+        if (rangeSize <= 0) {
+            return;
         }
+
+        if (start < begin() || end > this->end() || start > end) { // проверка границ 
+            throw std::out_of_range("Ошибка диапазона");
+        }
+
+        size_t startIndex = std::distance(begin(), start); // вычисление индексов
+        size_t endIndex = std::distance(begin(), end);
+
+        std::move(data + endIndex, data + size, data + startIndex); // сдвиг элементов 
+        size -= rangeSize; // уменьшение размера arr
     }
 
     // перегрузка оператора получения ссылки на элемент по индексу
@@ -186,8 +203,9 @@ public:
 
     // перегрузка оператора добавления элемента в конец массива
     MyArray& operator+(const T& element) {
-        insert(element, size);
-        return *this;
+        MyArray newArray(*this);
+        newArray.insert(element, newArray.size);
+        return newArray;
     }
 
     MyArray& operator+=(const T& element) {
@@ -196,7 +214,7 @@ public:
     }
 
     // перегрузка оператора сложения (конкатенации) с другим массивом
-    MyArray& operator+(const MyArray& other) {
+    MyArray operator+(const MyArray& other) const {
         MyArray temp(*this);
         for (size_t i = 0; i < other.size; i++) {
             temp.insert(other.data[i], temp.size);

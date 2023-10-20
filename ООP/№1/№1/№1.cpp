@@ -1,9 +1,34 @@
 ﻿#include <iostream>
 #include <locale.h>
+#include <vector>
 #include "Fraction.h"
+
+void testFractionConvert()
+{
+    Fraction f;
+    std::vector<std::pair<double, int>> data = {
+        {0, 0},
+        {0.521, 0},
+        {0.521, 1},
+        {0.521, 2},
+        {0.521, 3}
+    };
+
+    for (const auto& pair : data) {
+        f.convertFromDouble(pair.first, pair.second);
+        std::cout << "convertFromDouble(" << pair.first << ", " << pair.second << ") = ";
+        f.output();
+        std::cout << '\n';
+    }
+
+    std::cout << "testFractionConvert ended, press any key to continue...";
+    getchar();
+}
 
 int main() {
     setlocale(LC_ALL, "Russian");
+    testFractionConvert();
+
     Fraction f1(2, 3);
     Fraction f2(3, 4);
 
