@@ -110,6 +110,22 @@ Fraction Fraction::convertFromDouble(double value, int precision) {
     return Fraction(num, den);
 }
 
+Fraction Fraction::convertFromDouble(double value, int precision) {
+    double scaledValue = value * pow(10, precision); // умножаем число на 10^precision, чтобы сохранить нужное количество значащих знаков после запятой
+
+    int roundedValue = static_cast<int>(scaledValue + 0.5); // округляем полученное число до ближайшего целого
+    numerator = roundedValue; // устанавливаем числитель равным округленному значению
+
+    if (precision != 0) {
+        denominator = pow(10, precision); // устанавливаем знаменатель = 10^precision
+    }
+    else {
+        denominator = 1;
+    }
+
+    reduce(); // сокращаем
+}
+
 // Метод для вычисления наибольшего общего делителя 
 int Fraction::computeGCD(int a, int b) const {
     if (b == 0)
