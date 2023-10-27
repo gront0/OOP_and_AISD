@@ -13,7 +13,60 @@ private:
 public:
     template <typename IT, typename AT>
     class TemplateIterator;
+
     using Iterator = TemplateIterator<T, MyArray>;
+    using ConstIterator = TemplateIterator<const T, const MyArray>;
+
+public:
+    template <typename IT, typename AT>
+    class TemplateIterator {
+    private:
+        IT* ptr;
+
+    public:
+        TemplateIterator(IT* p) : ptr(p) {}
+
+        // Операторы сравнения
+        bool operator==(const TemplateIterator& other) const {
+            return ptr == other.ptr;
+        }
+
+        bool operator!=(const TemplateIterator& other) const {
+            return ptr != other.ptr;
+        }
+
+        // Операторы разыменования
+        AT& operator*() const {
+            return *ptr;
+        }
+
+        AT* operator->() const {
+            return ptr;
+        }
+
+        // Операторы инкремента и декремента
+        TemplateIterator& operator++() {
+            ++ptr;
+            return *this;
+        }
+
+        TemplateIterator operator++(int) {
+            TemplateIterator temp = *this;
+            ++ptr;
+            return temp;
+        }
+
+        TemplateIterator& operator--() {
+            --ptr;
+            return *this;
+        }
+
+        TemplateIterator operator--(int) {
+            TemplateIterator temp = *this;
+            --ptr;
+            return temp;
+        }
+    };
 
 public:
     // Конструкторы
@@ -126,6 +179,10 @@ public:
 
     // Поиск максимального элемента
     T findMax() const {
+        if (size == 0) {
+            throw std::logic_error("Массив пуст!");
+        }
+
         T maxElement = data[0];
         for (size_t i = 1; i < size; i++) {
             if (data[i] > maxElement) {
@@ -137,6 +194,10 @@ public:
 
     // Поиск минимального элемента
     T findMin() const {
+        if (size == 0) {
+            throw std::logic_error("Массив пуст!");
+        }
+
         T minElement = data[0];
         for (size_t i = 1; i < size; i++) {
             if (data[i] < minElement) {
