@@ -26,7 +26,6 @@ public:
     public:
         TemplateIterator(IT* p) : ptr(p) {}
 
-        // ќператоры сравнени€
         bool operator==(const TemplateIterator& other) const {
             return ptr == other.ptr;
         }
@@ -35,7 +34,6 @@ public:
             return ptr != other.ptr;
         }
 
-        // ќператоры разыменовани€
         AT& operator*() const {
             return *ptr;
         }
@@ -44,7 +42,6 @@ public:
             return ptr;
         }
 
-        // ќператоры инкремента и декремента
         TemplateIterator& operator++() {
             ++ptr;
             return *this;
@@ -253,6 +250,10 @@ public:
         return data[index];
     }
 
+    const T& operator[](size_t index) const {
+        return data[index];
+    }
+
     // перегрузка оператора присваивани€
     MyArray& operator=(const MyArray& other) {
         if (this != &other) {
@@ -263,7 +264,7 @@ public:
     }
 
     // перегрузка оператора добавлени€ элемента в конец массива
-    MyArray& operator+(const T& element) {
+    MyArray operator+(const T& element) const {
         MyArray newArray(*this);
         newArray.insert(element, newArray.size);
         return newArray;
