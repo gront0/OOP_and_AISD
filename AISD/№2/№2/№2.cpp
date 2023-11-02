@@ -48,6 +48,30 @@ vector<int> boyermooresearch(const string& text, const string& pattern) {
     return positions;
 }
 
+vector<int> findall(const string& text, const string& pattern, int start, int end) {
+    vector<int> indices;
+    int pattern_length = pattern.length();
+    int text_length = text.length();
+
+    if (pattern_length > text_length || start >= end + 1)
+        return indices;
+
+    for (int i = start; i <= end + 1 - pattern_length; i++) {
+        bool match = true;
+        for (int j = 0; j < pattern_length; j++) {
+            if (text[i + j] != pattern[j]) {
+                match = false;
+                break;
+            }
+        }
+        if (match) {
+            indices.push_back(i);
+        }
+    }
+
+    return indices;
+}
+
 int main() {
     setlocale(LC_ALL, "russian");
     string text = "abacaabababacaba";
