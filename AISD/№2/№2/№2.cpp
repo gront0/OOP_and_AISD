@@ -2,7 +2,6 @@
 #include <string>
 #include <vector>
 #include <locale.h>
-
 using namespace std;
 
 vector<int> boyermooresearch(const string& text, const string& pattern) {
