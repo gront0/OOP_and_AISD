@@ -5,7 +5,7 @@
 
 using namespace std;
 
-vector<int> BoyerMooreSearch(const string& text, const string& pattern) {
+vector<int> boyermooresearch(const string& text, const string& pattern) {
     vector<int> positions;
 
     int n = text.length();
@@ -15,10 +15,10 @@ vector<int> BoyerMooreSearch(const string& text, const string& pattern) {
         return positions;
     }
 
-    vector<int> badChar(256, -1);
+    vector<int> badchar(256, -1);
 
     for (int i = 0; i < m; i++) {
-        badChar[pattern[i]] = i;
+        badchar[pattern[i]] = i;
     }
 
     int s = 0;
@@ -34,14 +34,14 @@ vector<int> BoyerMooreSearch(const string& text, const string& pattern) {
             positions.push_back(s);
 
             if (s + m < n) {
-                s += m - badChar[text[s + m]];
+                s += m - badchar[text[s + m]];
             }
             else {
                 s += 1;
             }
         }
         else {
-            s += max(1, j - badChar[text[s + j]]);
+            s += max(1, j - badchar[text[s + j]]);
         }
     }
 
@@ -49,21 +49,22 @@ vector<int> BoyerMooreSearch(const string& text, const string& pattern) {
 }
 
 int main() {
-    setlocale(LC_ALL, "Russian");
-    string text = "ABACAABABABACABA";
-    string pattern = "ABA";
+    setlocale(LC_ALL, "russian");
+    string text = "abacaabababacaba";
+    string pattern = "aba";
 
-    int index = BoyerMooreSearch(text, pattern)[0];
-    cout << "Индекс первого появления: " << index << endl;
+    cout << "Текст: " << text << endl;
+    cout << "Шаблон:" << pattern << endl;
+    cout << endl;
+    int index = boyermooresearch(text, pattern)[0];
+    cout << "индекс первого появления: " << index << endl;
 
-    vector<int> indexes = BoyerMooreSearch(text, pattern);
-    cout << "Индексы всех вхождений: ";
+    vector<int> indexes = boyermooresearch(text, pattern);
+    cout << "индексы всех вхождений: ";
 
     for (int i = 0; i < indexes.size(); i++) {
         cout << indexes[i] << " ";
     }
-
-    cout << endl;
 
     return 0;
 }
