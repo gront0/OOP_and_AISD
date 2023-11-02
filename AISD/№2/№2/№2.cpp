@@ -90,5 +90,36 @@ int main() {
         cout << indexes[i] << " ";
     }
 
+    cout << "\n================================" << endl;
+
+    text = "std::move_iterator is an iterator adaptor which behaves exactly like the underlying iterator";
+    pattern = "tor";
+
+    cout << "Текст: " << text << endl;
+    cout << "Шаблон:" << pattern << endl;
+    cout << endl;
+
+    // примеры использования функции
+    std::vector<int> indices = findall(text, pattern, 0, 91);
+    cout << "поиск во всем тексте: ";
+    for (int index : indices) {
+        cout << index << " ";
+    }
+    cout << endl;
+
+    indices = findall(text, pattern, 17, 91);
+    cout << "поиск в подстроке 'r is an iterator adaptor which behaves exactly like the underlying iterator': ";
+    for (int index : indices) {
+        cout << index << " ";
+    }
+    cout << endl;
+
+    indices = findall(text, pattern, 28, 36);
+    cout << "поиск в подстроке 'rator ad': ";
+    for (int index : indices) {
+        cout << index << " ";
+    }
+    cout << endl;
+
     return 0;
 }
