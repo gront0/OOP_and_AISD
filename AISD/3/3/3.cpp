@@ -1,13 +1,14 @@
 ﻿#include <iostream>
 #include <vector>
 #include <locale.h>
+using namespace std;
 
-void shellSort(std::vector<int>& arr) {
+void shellSort(vector<int>& arr) {
+
     int n = arr.size();
 
     // находим интервал между элементами, который будет уменьшаться после каждой итерации
     for (int gap = n / 2; gap > 0; gap /= 2) {
-
         // применяем алгоритм сортировки вставками для каждого интервала
         for (int i = gap; i < n; i++) {
             int temp = arr[i];
@@ -21,23 +22,39 @@ void shellSort(std::vector<int>& arr) {
 
 }
 
+bool isSorted(const vector<int>& arr) {
+    for (int i = 1; i < arr.size(); i++) {
+        if (arr[i] < arr[i - 1]) {
+            return false;
+        }
+    }
+    return true;
+}
+
 int main() {
     setlocale(LC_ALL, "Russian");
-    std::vector<int> arr = { 9, 5, 2, 6, 1, 8, 3, 7, 4 };
+    vector<int> arr = { 9, 5, 2, 6, 1, 8, 3, 7, 4 };
     
-    std::cout << "Исходный массив: ";
+    cout << "Исходный массив: ";
     for (int num : arr) {
-        std::cout << num << " ";
+        cout << num << " ";
     }
-    std::cout << std::endl;
+    cout << endl;
 
     shellSort(arr);
 
-    std::cout << "Отсортированный массив: ";
+    cout << "Отсортированный массив: ";
     for (int num : arr) {
-        std::cout << num << " ";
+        cout << num << " ";
     }
-    std::cout << std::endl;
+    cout << endl;
+
+    if (isSorted(arr)) {
+        cout << "Массив отсортирован." << endl;
+    }
+    else {
+        cout << "Массив не отсортирован." << endl;
+    }
 
     return 0;
 }
