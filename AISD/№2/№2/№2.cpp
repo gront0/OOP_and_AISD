@@ -91,28 +91,28 @@ int main() {
 
     cout << "\n================================" << endl;
 
-    text = "std::move_iterator is an iterator adaptor which behaves exactly like the underlying iterator";
-    pattern = "tor";
+    text = "ехал трека через реку";
+    pattern = "река";
 
     cout << "Текст: " << text << endl;
     cout << "Шаблон:" << pattern << endl;
     cout << endl;
 
-    std::vector<int> indices = findall(text, pattern, 0, 91);
+    /*std::vector<int> indices = findall(text, pattern, 0, 91);
     cout << "поиск во всем тексте: ";
     for (int index : indices) {
         cout << index << " ";
     }
     cout << endl;
 
-    indices = findall(text, pattern, 17, 91);
-    cout << "поиск в подстроке 'r is an iterator adaptor which behaves exactly like the underlying iterator': ";
+    indices = findall(text, pattern, 0, 20);
+    cout << "поиск в подстроке 'с 17 по 91': ";
     for (int index : indices) {
         cout << index << " ";
     }
-    cout << endl;
+    cout << endl;*/
 
-    indices = findall(text, pattern, 28, 36);
+    std::vector<int> indices = findall(text, pattern, 0, 20);
     cout << "поиск в подстроке 'rator ad': ";
     for (int index : indices) {
         cout << index << " ";
