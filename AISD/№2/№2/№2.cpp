@@ -98,7 +98,6 @@ int main() {
     cout << "Шаблон:" << pattern << endl;
     cout << endl;
 
-    // примеры
     std::vector<int> indices = findall(text, pattern, 0, 91);
     cout << "поиск во всем тексте: ";
     for (int index : indices) {
