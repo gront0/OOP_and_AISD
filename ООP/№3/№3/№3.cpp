@@ -65,7 +65,7 @@ int main() {
     BoolVector vin;
     std::cout << "Введите последовательность битов (например, 010101), затем пробел или Enter: ";
     std::cin >> vin;
-    std::cout << "Вы ввели: '" << vin << "' размер=" << vin.getSize() << "\n";
+    std::cout << "Вы ввели: '" << vin << "' размер=" << vin.size() << "\n";
 
     return 0;
 }
